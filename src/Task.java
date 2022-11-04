@@ -1,25 +1,21 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public abstract class Task implements repeatable{
+public abstract class Task implements Repeatable{
     String name;
     String taskDescription;
-    TASK_TYPE task_type;
+    taskType task_type;
     private int id;
-    Repeatability repeatability;
+
     private LocalDateTime dateTime;
 
+    public abstract boolean nextRepeat(LocalDate dateForChecking);
 
+    enum taskType {PERSONAL,WORKER};
 
-    @Override
-    public LocalDateTime nextRepeat(Repeatability repeatability) {
-        return dateTime;
-    }
-
-    enum TASK_TYPE {personal,worker};
-   enum Repeatability{one_time,daily,weekly,monthly,annual};
     private static int counter;
 
-    public Task(String name, String taskDescription, TASK_TYPE task_type, Repeatability repeatability,LocalDateTime dateTime) {
+    public Task(String name, String taskDescription, taskType task_type,LocalDateTime dateTime) {
         if (taskDescription == null || name.isBlank()) {
             System.out.println("Заполните полностью");
             throw new IllegalArgumentException();
@@ -27,7 +23,7 @@ public abstract class Task implements repeatable{
             this.taskDescription = taskDescription;
         }
         this.task_type = task_type;
-        this.repeatability = repeatability;
+
         this.dateTime=dateTime;
         if (name == null || name.isBlank()) {
             System.out.println("Заполните задачу полностью");
@@ -38,11 +34,22 @@ public abstract class Task implements repeatable{
         id = ++counter;
     }
 
+    @Override
+    public LocalDateTime nextRepeat() {
+        return null;
+    }
+
     public int getId() {
         return id;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
 
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
 
     public String getName() {
         return name;
@@ -60,15 +67,13 @@ public abstract class Task implements repeatable{
         this.taskDescription = taskDescription;
     }
 
-    public TASK_TYPE getTask_type() {
+    public taskType getTask_type() {
         return task_type;
     }
 
 
 
-    public Repeatability getRepeatability() {
-        return repeatability;
-    }
+
 
     @Override
     public String toString() {
@@ -77,7 +82,8 @@ public abstract class Task implements repeatable{
                 ", taskDescription='" + taskDescription + '\'' +
                 ", task_type=" + task_type +
                 ", id=" + id +
-                ", repeatability=" + repeatability +
+                ", dateTime=" + dateTime +
                 '}';
     }
+
 }

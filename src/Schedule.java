@@ -1,7 +1,27 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Schedule {
-    private final Map<Integer, Task> tasks = new HashMap<>();
+    private  static final Map<Integer, Task> taskMap = new HashMap<>();
+     private Collection<Task> removedTasks;
+     public static void add(Task task){
+         taskMap.put(task.getId(),task);
+     }
+     public void remove(int id){
+         taskMap.remove(id);
+     }
+    public Collection<Task> getAllbyDate(LocalDate inputDate){
+         List<Task> resultList = new ArrayList<>();
+         for(Map.Entry<Integer, Task> integerTaskEntry : taskMap.entrySet()) {
+             var task :Task integerTaskEntry.getValue();
+             if (task.isAvilable(inputDate)) {
+                 resultList.add(task);
+             }
+         }
+         return resultList;
 
-}
+
+
+
+}}

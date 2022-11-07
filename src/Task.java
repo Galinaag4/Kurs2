@@ -1,21 +1,21 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public abstract class Task implements Repeatable{
+public  class Task implements Repeatable{
     String name;
     String taskDescription;
-    taskType task_type;
+    String task_type;
     private int id;
 
     private LocalDateTime dateTime;
-
-    public abstract boolean nextRepeat(LocalDate dateForChecking);
 
     enum taskType {PERSONAL,WORKER};
 
     private static int counter;
 
-    public Task(String name, String taskDescription, taskType task_type,LocalDateTime dateTime) {
+
+
+    public Task(String name, String taskDescription, String task_type, LocalDateTime dateTime) {
         if (taskDescription == null || name.isBlank()) {
             System.out.println("Заполните полностью");
             throw new IllegalArgumentException();
@@ -35,8 +35,8 @@ public abstract class Task implements Repeatable{
     }
 
     @Override
-    public LocalDateTime nextRepeat() {
-        return null;
+    public boolean isAvailable(LocalDate inputDate) {
+        return inputDate.isEqual(getDateTime().toLocalDate());
     }
 
     public int getId() {
@@ -67,7 +67,7 @@ public abstract class Task implements Repeatable{
         this.taskDescription = taskDescription;
     }
 
-    public taskType getTask_type() {
+    public String getTask_type() {
         return task_type;
     }
 

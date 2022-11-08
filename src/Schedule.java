@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.*;
 
 public class Schedule {
@@ -11,17 +12,21 @@ public class Schedule {
      public void remove(int id){
          taskMap.remove(id);
      }
-    public Collection<Task> getAllbyDate(LocalDate inputDate){
-         List<Task> resultList = new ArrayList<>();
-         for(Map.Entry<Integer, Task> integerTaskEntry : taskMap.entrySet()) {
-             var task :Task integerTaskEntry.getValue();
-             if (task.isAvilable(inputDate)) {
-                 resultList.add(task);
-             }
-         }
-         return resultList;
+    public Collection<Task> getAllbyDate(LocalDate inputDate) {
+        List<Task> resultList = new ArrayList<>();
+        for (Map.Entry<Integer, Task> integerTaskEntry : taskMap.entrySet()) {
+            Task task  = integerTaskEntry.getValue();
+            if (task.isAvailable(inputDate)) {
+                resultList.add(task);
+            }
+        }
+        return resultList;
+    }
 
 
 
 
-}}
+
+
+
+}

@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 
 public  class Task implements Repeatable{
     String name;
@@ -15,7 +16,7 @@ public  class Task implements Repeatable{
 
 
 
-    public Task(String name, String taskDescription, String task_type, LocalDateTime dateTime) {
+    public Task(String name, String taskDescription, String task_type, LocalDateTime taskdateTime) {
         if (taskDescription == null || name.isBlank()) {
             System.out.println("Заполните полностью");
             throw new IllegalArgumentException();
@@ -24,7 +25,7 @@ public  class Task implements Repeatable{
         }
         this.task_type = task_type;
 
-        this.dateTime=dateTime;
+       this.dateTime=taskdateTime;
         if (name == null || name.isBlank()) {
             System.out.println("Заполните задачу полностью");
             throw new IllegalArgumentException();

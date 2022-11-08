@@ -26,13 +26,13 @@ public class Main {
                             getTaskByDay(scanner);
                             break;
                         case 4:
-                            taskList.getAllTaskFromTaskList();
+                            //taskList.getAllTaskFromTaskList();
                             break;
                         case 5:
-                            taskList.editTask(scanner);
+                           // taskList.editTask(scanner);
                             break;
                         case 6:
-                            taskList.getDeletedTask();
+                            //taskList.getDeletedTask();
                             break;
                         case 0:
                             break label;
@@ -92,7 +92,7 @@ public class Main {
     private static void getTaskByDay(Scanner scanner){
         System.out.print("Введите дату задачи в формате dd.mm.yy :  ");
         LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine());
-        var allTaskByDay :Collection<Task> = schedule.getAllbyDate(LocalDate.from(dateTime));
+        var allTaskByDay  = schedule.getAllbyDate(LocalDate.from(dateTime));
         System.out.println("Список здач этого дня");
         for (Task task: allTaskByDay){
             System.out.println(task);
